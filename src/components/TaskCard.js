@@ -140,9 +140,12 @@ const TaskCard = ({ task, onProgressChange }) => {
       <ChatSidebar 
             isOpen={showChat} 
             onClose={() => setShowChat(false)} 
-            faculty={{ name: task.facultyName }} 
-            messages={messages} 
-            onSendMessage={handleSendMessage} 
+            taskId={1}
+            studentID={2}
+            profID={3}
+            // faculty={{ name: task.facultyName }} 
+            // messages={messages} 
+            // onSendMessage={handleSendMessage} 
         />
     </div>
   );

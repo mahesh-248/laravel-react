@@ -6,27 +6,27 @@ const SignUpForm = () => {
 	const navigate = useNavigate()
 
 
-	useEffect(() => {
+	// useEffect(() => {
 
-        const sessionToken = localStorage.getItem('session_token');
-        const role = localStorage.getItem('role');
+    //     const sessionToken = localStorage.getItem('session_token');
+    //     const role = localStorage.getItem('role');
 
-        if (sessionToken && role) {
-            if (role === 'Student') {
-         		navigate('/student'); // Redirect to '/professor' route
-            }
-			else if(role === 'Professor'){
-				navigate('/professor')
-			} 
-			else{
-				localStorage.clear();
-            	navigate('/'); 
-			}
-        } else {
-            localStorage.clear();
-            navigate('/'); // Redirect to '/' route
-        }
-    }, []);
+    //     if (sessionToken && role) {
+    //         if (role === 'Student') {
+    //      		navigate('/student'); // Redirect to '/professor' route
+    //         }
+	// 		else if(role === 'Professor'){
+	// 			navigate('/professor')
+	// 		} 
+	// 		else{
+	// 			localStorage.clear();
+    //         	navigate('/'); 
+	// 		}
+    //     } else {
+    //         localStorage.clear();
+    //         navigate('/'); // Redirect to '/' route
+    //     }
+    // }, []);
 
 	const [name,setName] = useState("");
 	const [email,setEmail] = useState("")
@@ -40,32 +40,55 @@ const SignUpForm = () => {
     	navigate('/');
   	};
 
+	// const handleSendVerification = async () => {
+    //     // Implement sending email verification here
+    //     setShowVerificationInput(true);
+    // };
+
+	// const handleVerifyCode = async () => {
+    //     // Implement code verification here
+    //     try {
+    //         // Assuming any endpoint as your backend endpoint for verification
+    //         const res = await request.post('endpoint', { email, verificationCode });
+    //         if (res.data.isVerified) {
+    //             setIsVerified(true);
+    //             // you can now allow the user to proceed with the signup process
+    //         } else {
+    //             alert('Incorrect verification code.');
+    //         }
+    //     } catch (e) {
+    //         alert(e.message);
+    //     }
+    // };
 	const handleSendVerification = async () => {
-        // Implement sending email verification here
-        setShowVerificationInput(true);
-    };
+		try {
+			const res = await request.post('/api/send-verification', { email });
+			console.log(res.data); // Log the response from the server
+			setShowVerificationInput(true);
+		} catch (e) {
+			alert(e.message);
+		}
+	};
 
 	const handleVerifyCode = async () => {
-        // Implement code verification here
-        try {
-            // Assuming '/api/verify-code' is your backend endpoint for verification
-            const res = await request.post('/api/verify-code', { email, verificationCode });
-            if (res.data.isVerified) {
-                setIsVerified(true);
-                // you can now allow the user to proceed with the signup process
-            } else {
-                alert('Incorrect verification code.');
-            }
-        } catch (e) {
-            alert(e.message);
-        }
-    };
+		try {
+			const res = await request.post('/api/verify-code', { email, verificationCode });
+			if (res.data.isVerified) {
+			setIsVerified(true);
+			} else {
+			alert('Incorrect verification code.');
+			}
+		} catch (e) {
+			alert(e.message);
+		}
+	};
+
 
 	const handleSubmit = async (e) => {
         e.preventDefault();
         if (isVerified) {
             try {
-                const res = await request.post('/api/signup/student', { name, email, password, graduationDate });
+                const res = await request.post('/api/signup/student', { name, email, password, graduation_date });
                 if (res.statusText === "OK") {
                     localStorage.setItem('session_token', res.data.token);
                     navigate('/student', { state: { user: res.data.user } });

@@ -11,36 +11,36 @@ const ProfessorDashboard = () => {
 	const location = useLocation();
 	const userInitial = location.state?.user?.name?.charAt(0).toUpperCase() || "M";
 
-	useEffect(() => {
-        const sessionToken = localStorage.getItem('session_token');
-        const role = localStorage.getItem('role');
+	// useEffect(() => {
+    //     const sessionToken = localStorage.getItem('session_token');
+    //     const role = localStorage.getItem('role');
 
-        if (sessionToken && role) {
-            if (role === 'Student') {
-				navigate('/student')
-		   }
-		   else if(role === 'Professor'){
-				const getData = async() => {
+    //     if (sessionToken && role) {
+    //         if (role === 'Student') {
+	// 			navigate('/student')
+	// 	   }
+	// 	   else if(role === 'Professor'){
+	// 			const getData = async() => {
 
-					try{
-						const res = await request.post('/api/professor/tasks',{"token" : sessionToken })
-						console.log(res)
-					}
-					catch(e){
-						console.log(e)
-					}
-				}
-				getData()
-		   } 
-		   else{
-			   localStorage.clear();
-			   navigate('/'); 
-		   }
-        } else {
-            localStorage.clear();
-            navigate('/'); // Redirect to '/' route
-        }
-    }, []);
+	// 				try{
+	// 					const res = await request.post('/api/professor/tasks',{"token" : sessionToken })
+	// 					console.log(res)
+	// 				}
+	// 				catch(e){
+	// 					console.log(e)
+	// 				}
+	// 			}
+	// 			getData()
+	// 	   } 
+	// 	   else{
+	// 		   localStorage.clear();
+	// 		   navigate('/'); 
+	// 	   }
+    //     } else {
+    //         localStorage.clear();
+    //         navigate('/'); // Redirect to '/' route
+    //     }
+    // }, []);
 
 
 	const events = [
