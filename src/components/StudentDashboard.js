@@ -68,15 +68,6 @@ const StudentDashboard = () => {
 		{ title: 'Math Assignment', date: '2024-03-14' },
 	];
 
-
-	const todaysTasks = [
-		{ title: 'Complete Math Assignment' },
-	];
-
-	const weeksTasks = [
-		{ title: 'Start History Project' },
-	];
-
 	 const handleLogout = () => {
     // Clear local storage or any state management where the session is stored
     localStorage.removeItem('session_token');
@@ -109,7 +100,7 @@ const StudentDashboard = () => {
 					<CalendarComponent events={events} />
 				</div>
 				<div className="lg:flex-1 lg:max-w-sm">
-					<TasksSidebar todaysTasks={todaysTasks} weeksTasks={weeksTasks} />
+					<TasksSidebar />
 				</div>
 				<div className="lg:flex-1 lg:flex-grow">
 					<TasksProgressSection />

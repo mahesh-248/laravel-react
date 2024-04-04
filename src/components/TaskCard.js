@@ -116,7 +116,7 @@ const TaskCard = ({ task, onProgressChange }) => {
           </form>
         </div>
       )}
-      <div className="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-600 mt-3">
+      {/* <div className="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-600 mt-3">
         <div
           className="bg-green-600 h-2.5 rounded-full"
           style={{ width: `${progressPercentage}%` }}
@@ -125,7 +125,7 @@ const TaskCard = ({ task, onProgressChange }) => {
             {progressPercentage.toFixed(0)}%
           </div>
         </div>
-      </div>
+      </div> */}
         <div className="mt-4 flex justify-end space-x-2">
             <button onClick={navigateToSubmitForm} className="bg-gray-300 hover:bg-green-400 text-black font-bold py-1 px-2 rounded mr-2">
             Submit
